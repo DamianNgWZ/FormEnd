@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand: #e4fe71;
+}
+
+body {
+  font-family: theme('fontFamily.sans');
+}
