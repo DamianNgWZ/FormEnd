@@ -1,4 +1,4 @@
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import { IoSaveOutline } from 'react-icons/io5';
 
 export default function Nav() {
