@@ -33,7 +33,7 @@ export default function AboutForm({
   onUpdateFormDescription,
 }: AboutFormProps) {
   return (
-    <div className="bg-white p-8 rounded-lg">
+    <div className="bg-white border border-gray-200 p-8 rounded-lg">
       {/* Editable Form Header */}
       <div className="mb-8">
         <input
