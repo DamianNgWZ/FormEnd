@@ -43,8 +43,10 @@ export default function Select({
 
   return (
     <FieldEditor id={id} label="Select Field" onDelete={onDelete}>
-      <div>
-        <label className="block text-xs font-medium text-text-secondary mb-1">Label</label>
+      <div className="mb-3">
+        <label className="block text-xs font-medium text-text-secondary mb-1">
+          Label
+        </label>
         <input
           type="text"
           value={label}
@@ -53,8 +55,10 @@ export default function Select({
           className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-brand-default focus:border-brand-default"
         />
       </div>
-      <div>
-        <label className="block text-xs font-medium text-text-secondary mb-1">Options</label>
+      <div className="mb-3">
+        <label className="block text-xs font-medium text-text-secondary mb-1">
+          Options
+        </label>
         {options.map((option, idx) => (
           <div key={idx} className="flex items-center gap-2 mb-2">
             <input
@@ -82,7 +86,7 @@ export default function Select({
           + Add option
         </button>
       </div>
-      <div className="flex items-center gap-2 mt-2">
+      <div className="flex items-center gap-2">
         <input
           id={`required-${id}`}
           type="checkbox"
@@ -90,7 +94,10 @@ export default function Select({
           onChange={(e) => setRequired(e.target.checked)}
           className="w-4 h-4 text-brand-default border-gray-300 rounded focus:ring-brand-default"
         />
-        <label htmlFor={`required-${id}`} className="text-xs font-medium text-text-secondary cursor-pointer">
+        <label
+          htmlFor={`required-${id}`}
+          className="text-xs font-medium text-text-secondary cursor-pointer"
+        >
           Required
         </label>
       </div>

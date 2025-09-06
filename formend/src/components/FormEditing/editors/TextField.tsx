@@ -30,7 +30,7 @@ export default function TextField({
 
   return (
     <FieldEditor id={id} label="Text Field" onDelete={onDelete}>
-      <div>
+      <div className="mb-3">
         <label className="block text-xs font-medium text-text-secondary mb-1">
           Label
         </label>
@@ -42,7 +42,7 @@ export default function TextField({
           className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-brand-default focus:border-brand-default"
         />
       </div>
-      <div>
+      <div className="mb-3">
         <label className="block text-xs font-medium text-text-secondary mb-1">
           Placeholder
         </label>
@@ -54,7 +54,7 @@ export default function TextField({
           className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-brand-default focus:border-brand-default"
         />
       </div>
-      <div className="flex items-center gap-2 mt-2">
+      <div className="flex items-center gap-2">
         <input
           id={`required-${id}`}
           type="checkbox"

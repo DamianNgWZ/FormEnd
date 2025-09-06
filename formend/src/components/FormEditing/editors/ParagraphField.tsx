@@ -14,7 +14,7 @@ interface ParagraphProps {
   onChange: (id: string, data: ParagraphData) => void;
 }
 
-export default function Paragraph({
+export default function ParagraphField({
   id,
   initialData = { label: '', placeholder: '', required: false },
   onDelete,
@@ -30,8 +30,10 @@ export default function Paragraph({
 
   return (
     <FieldEditor id={id} label="Paragraph Field" onDelete={onDelete}>
-      <div>
-        <label className="block text-xs font-medium text-text-secondary mb-1">Label</label>
+      <div className="mb-3">
+        <label className="block text-xs font-medium text-text-secondary mb-1">
+          Label
+        </label>
         <input
           type="text"
           value={label}
@@ -40,8 +42,10 @@ export default function Paragraph({
           className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-brand-default focus:border-brand-default"
         />
       </div>
-      <div>
-        <label className="block text-xs font-medium text-text-secondary mb-1">Placeholder</label>
+      <div className="mb-3">
+        <label className="block text-xs font-medium text-text-secondary mb-1">
+          Placeholder
+        </label>
         <textarea
           value={placeholder}
           onChange={(e) => setPlaceholder(e.target.value)}
@@ -50,7 +54,7 @@ export default function Paragraph({
           className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-brand-default focus:border-brand-default resize-none"
         />
       </div>
-      <div className="flex items-center gap-2 mt-2">
+      <div className="flex items-center gap-2">
         <input
           id={`required-${id}`}
           type="checkbox"
@@ -58,7 +62,10 @@ export default function Paragraph({
           onChange={(e) => setRequired(e.target.checked)}
           className="w-4 h-4 text-brand-default border-gray-300 rounded focus:ring-brand-default"
         />
-        <label htmlFor={`required-${id}`} className="text-xs font-medium text-text-secondary cursor-pointer">
+        <label
+          htmlFor={`required-${id}`}
+          className="text-xs font-medium text-text-secondary cursor-pointer"
+        >
           Required
         </label>
       </div>
