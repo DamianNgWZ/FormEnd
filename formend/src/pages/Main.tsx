@@ -1,21 +1,21 @@
 import Nav from '../components/ui/Nav';
-import ElementBox from '../components/FormCreation/ElementBox';
+import ElementBox from '../components/FormCreation/AddFormElements';
+import AboutForm from '../components/FormCreation/AboutForm';
 
-export default function Main() {
+export default function MainPage() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen bg-surface-2">
       <Nav />
-
-      <main className="flex flex-col md:flex-row flex-grow p-6 md:p-8 gap-6 md:gap-8 max-w-3xl mx-auto w-full">
-
-        <div className="md:w-1/2 w-full">
-          <ElementBox />
+      <div className="max-w-6xl mx-auto p-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-1/3">
+            <ElementBox />
+          </div>
+          <div className="lg:w-2/3">
+            <AboutForm />
+          </div>
         </div>
-        
-        <div className="md:w-1/2 w-full flex items-center justify-center">
-          TODO : FORM REVIEW
-        </div>
-      </main>
+      </div>
     </div>
   );
 }

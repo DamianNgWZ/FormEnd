@@ -6,7 +6,11 @@ interface ElementButtonProps {
   onClick: () => void;
 }
 
-export default function ElementButton({ label, icon, onClick }: ElementButtonProps) {
+export default function ElementButton({
+  label,
+  icon,
+  onClick,
+}: ElementButtonProps) {
   return (
     <button
       type="button"
