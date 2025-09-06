@@ -2,7 +2,11 @@ import { FiType, FiAlignLeft, FiCheckSquare } from 'react-icons/fi';
 import { MdFormatListBulleted } from 'react-icons/md';
 import ElementButton from './ElementButton';
 
-export default function AddFormElements() {
+interface AddFormElementsProps {
+  onAddElement: (type: 'text' | 'paragraph' | 'checkbox' | 'select') => void;
+}
+
+export default function AddFormElements({ onAddElement }: AddFormElementsProps) {
   return (
     <div className="bg-white p-6 rounded-xl border border-gray-300 shadow-sm">
       <h2 className="text-lg font-semibold text-gray-900 mb-5">
@@ -12,22 +16,22 @@ export default function AddFormElements() {
         <ElementButton
           label="Text"
           icon={<FiType />}
-          onClick={() => console.log('Text clicked')}
+          onClick={() => onAddElement('text')}
         />
         <ElementButton
           label="Paragraph"
           icon={<FiAlignLeft />}
-          onClick={() => console.log('Paragraph clicked')}
+          onClick={() => onAddElement('paragraph')}
         />
         <ElementButton
           label="Checkbox"
           icon={<FiCheckSquare />}
-          onClick={() => console.log('Checkbox clicked')}
+          onClick={() => onAddElement('checkbox')}
         />
         <ElementButton
           label="Select"
           icon={<MdFormatListBulleted />}
-          onClick={() => console.log('Select clicked')}
+          onClick={() => onAddElement('select')}
         />
       </div>
     </div>

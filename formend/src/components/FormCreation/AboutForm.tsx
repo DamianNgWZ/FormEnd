@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { type FormElement } from '../../types';
 
-export default function AboutForm() {
+interface AboutFormProps {
+  formElements: FormElement[];
+  onRemoveElement: (id: string) => void;
+}
+
+export default function AboutForm({ formElements, onRemoveElement }: AboutFormProps) {
   const [formTitle, setFormTitle] = useState('');
   const [formDescription, setFormDescription] = useState('');
-  const [formFields, setFormFields] = useState<string[]>([]);
 
   return (
     <div className="mb-8 bg-white p-6 rounded-lg border border-gray-200">
@@ -21,8 +26,9 @@ export default function AboutForm() {
         rows={2}
         className="w-full text-gray-500 mb-6 resize-none bg-transparent outline-none"
       />
+
       {/* Form Fields Section */}
-      {formFields.length === 0 ? (
+      {formElements.length === 0 ? (
         <div className="min-h-32 border-2 border-dashed border-gray-300 rounded-lg p-6 flex items-center justify-center">
           <p className="text-text-secondary text-center">
             No form fields added yet. <br />
@@ -30,7 +36,19 @@ export default function AboutForm() {
           </p>
         </div>
       ) : (
-        <div>{/* TODO: Render form fields here */}</div>
+        <div>
+          {formElements.map((field) => (
+            <div key={field.id} className="mb-4 flex items-center justify-between border p-3 rounded">
+              <span>{field.type}</span>
+              <button
+                onClick={() => onRemoveElement(field.id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
