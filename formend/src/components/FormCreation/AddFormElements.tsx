@@ -8,7 +8,7 @@ interface AddFormElementsProps {
 
 export default function AddFormElements({ onAddElement }: AddFormElementsProps) {
   return (
-    <div className="bg-white p-6 rounded-xl border border-gray-300 shadow-sm">
+    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
       <h2 className="text-lg font-semibold text-gray-900 mb-5">
         Add Form Elements
       </h2>
