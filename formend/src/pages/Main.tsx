@@ -61,23 +61,20 @@ export default function MainPage() {
   };
 
   // Determine if preview should be disabled (when no valid fields exist)
-  const canPreview = formElements.some(
-    (element) =>
-      element.data &&
-      'label' in element.data &&
-      element.data.label.trim() !== ''
+  const canPreview = formElements.some(element => 
+    element.data && 'label' in element.data && element.data.label.trim() !== ''
   );
 
   return (
     <div className="min-h-screen bg-surface-2">
-      <Nav
-        isPreviewMode={isPreviewMode}
+      <Nav 
+        isPreviewMode={isPreviewMode} 
         onTogglePreview={togglePreview}
         disablePreviewToggle={!canPreview}
       />
       <div className="max-w-6xl mx-auto p-8">
         {isPreviewMode ? (
-          <FormPreview
+          <FormPreview 
             formTitle={formTitle}
             formDescription={formDescription}
             formElements={formElements}
