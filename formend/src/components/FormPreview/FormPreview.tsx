@@ -1,5 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from 'react-hook-form';
-import { type FormElement } from '../../types';
+import {
+  type FormElement,
+  type TextFieldData,
+  type ParagraphData,
+  type CheckboxData,
+  type SelectData,
+} from '../../types';
+import TextFieldPreview from './TextFieldPreview';
+import ParagraphPreview from './ParagraphPreview';
+import CheckboxGroupPreview from './CheckboxGroupPreview';
+import SelectPreview from './SelectPreview';
 
 interface FormPreviewProps {
   formTitle: string;
@@ -16,10 +27,35 @@ export default function FormPreview({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log('Form submitted:', data);
+    const formSubmission = {
+      formId: crypto.randomUUID(),
+      submittedAt: new Date().toISOString(),
+      formTitle,
+      formDescription,
+      formStructure: formElements.map((el) => ({
+        id: el.id,
+        type: el.type,
+        label: el.data && 'label' in el.data ? el.data.label : '',
+      })),
+      submittedData: data,
+    };
+
+    console.log('=== FORM SUBMISSION ===');
+    console.log('Form ID:', formSubmission.formId);
+    console.log('Submitted At:', formSubmission.submittedAt);
+    console.log('Form Title:', formSubmission.formTitle);
+    console.log('Form Description:', formSubmission.formDescription);
+    console.log('Form Structure:', formSubmission.formStructure);
+    console.log('Submitted Data:', formSubmission.submittedData);
+    console.log('=====================');
+
+    alert('TO DO - make success state');
+
+    reset();
   };
 
   const validElements = formElements.filter(
@@ -63,7 +99,49 @@ export default function FormPreview({
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Field components will be added in next commit */}
+            {validElements.map((element) => {
+              switch (element.type) {
+                case 'text':
+                  return (
+                    <TextFieldPreview
+                      key={element.id}
+                      element={element as { id: string; data: TextFieldData }}
+                      register={register}
+                      errors={errors}
+                    />
+                  );
+                case 'paragraph':
+                  return (
+                    <ParagraphPreview
+                      key={element.id}
+                      element={element as { id: string; data: ParagraphData }}
+                      register={register}
+                      errors={errors}
+                    />
+                  );
+                case 'checkbox':
+                  return (
+                    <CheckboxGroupPreview
+                      key={element.id}
+                      element={element as { id: string; data: CheckboxData }}
+                      register={register}
+                      errors={errors}
+                    />
+                  );
+                case 'select':
+                  return (
+                    <SelectPreview
+                      key={element.id}
+                      element={element as { id: string; data: SelectData }}
+                      register={register}
+                      errors={errors}
+                    />
+                  );
+                default:
+                  return null;
+              }
+            })}
+
             <div className="pt-4">
               <button
                 type="submit"
