@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Nav from '../components/ui/Nav';
 import AddFormElements from '../components/FormCreation/AddFormElements';
 import AboutForm from '../components/FormCreation/AboutForm';
 import FormPreview from '../components/FormPreview/FormPreview';
+import SubmissionSuccess from '../components/SubmissionSuccess';
 import { useState } from 'react';
 import {
   type FormElement,
@@ -18,8 +20,25 @@ export default function MainPage() {
     'Tell us about yourself'
   );
   const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedData, setSubmittedData] = useState<any>(null);
 
   const togglePreview = () => setIsPreviewMode(!isPreviewMode);
+
+  const handleFormSubmission = (data: any) => {
+    setSubmittedData(data);
+    setIsSubmitted(true);
+  };
+
+  const backToForm = () => {
+    setIsSubmitted(false);
+    // Stay in preview mode
+  };
+
+  const backToEditor = () => {
+    setIsSubmitted(false);
+    setIsPreviewMode(false);
+  };
 
   const addElement = (type: 'text' | 'paragraph' | 'checkbox' | 'select') => {
     let defaultData: TextFieldData | ParagraphData | CheckboxData | SelectData;
@@ -61,23 +80,33 @@ export default function MainPage() {
   };
 
   // Determine if preview should be disabled (when no valid fields exist)
-  const canPreview = formElements.some(element => 
-    element.data && 'label' in element.data && element.data.label.trim() !== ''
+  const canPreview = formElements.some(
+    (element) =>
+      element.data &&
+      'label' in element.data &&
+      element.data.label.trim() !== ''
   );
 
   return (
     <div className="min-h-screen bg-surface-2">
-      <Nav 
-        isPreviewMode={isPreviewMode} 
+      <Nav
+        isPreviewMode={isPreviewMode}
         onTogglePreview={togglePreview}
-        disablePreviewToggle={!canPreview}
+        disablePreviewToggle={!canPreview || isSubmitted}
       />
       <div className="max-w-6xl mx-auto p-8">
-        {isPreviewMode ? (
-          <FormPreview 
+        {isSubmitted ? (
+          <SubmissionSuccess
+            submittedData={submittedData}
+            onBackToForm={backToForm}
+            onBackToEditor={backToEditor}
+          />
+        ) : isPreviewMode ? (
+          <FormPreview
             formTitle={formTitle}
             formDescription={formDescription}
             formElements={formElements}
+            onFormSubmission={handleFormSubmission}
           />
         ) : (
           <div className="flex flex-col lg:flex-row gap-8">

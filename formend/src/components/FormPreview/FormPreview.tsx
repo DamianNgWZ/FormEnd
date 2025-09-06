@@ -16,46 +16,23 @@ interface FormPreviewProps {
   formTitle: string;
   formDescription: string;
   formElements: FormElement[];
+  onFormSubmission: (data: any) => void;
 }
 
 export default function FormPreview({
   formTitle,
   formDescription,
   formElements,
+  onFormSubmission,
 }: FormPreviewProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const onSubmit = (data: any) => {
-    const formSubmission = {
-      formId: crypto.randomUUID(),
-      submittedAt: new Date().toISOString(),
-      formTitle,
-      formDescription,
-      formStructure: formElements.map((el) => ({
-        id: el.id,
-        type: el.type,
-        label: el.data && 'label' in el.data ? el.data.label : '',
-      })),
-      submittedData: data,
-    };
-
-    console.log('=== FORM SUBMISSION ===');
-    console.log('Form ID:', formSubmission.formId);
-    console.log('Submitted At:', formSubmission.submittedAt);
-    console.log('Form Title:', formSubmission.formTitle);
-    console.log('Form Description:', formSubmission.formDescription);
-    console.log('Form Structure:', formSubmission.formStructure);
-    console.log('Submitted Data:', formSubmission.submittedData);
-    console.log('=====================');
-
-    alert('TO DO - make success state');
-
-    reset();
+    onFormSubmission(data);
   };
 
   const validElements = formElements.filter(
